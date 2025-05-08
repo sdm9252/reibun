@@ -1,28 +1,27 @@
-#!/usr/bin/env python3
+from __future__ import annotations
 
-# import the main window object (mw) from aqt
-from aqt import mw
-# import the "show info" tool from utils.py
-from aqt.utils import showInfo, qconnect
-# import all of the Qt GUI library
-from aqt.qt import QAction
+from .config import *
+from .card_ui import *
 
-# We're going to add a menu item below. First we want to create a function to
-# be called when the menu item is activated.
 
-def testFunction() -> None:
-    # get the number of cards in the current collection, which is stored in
-    # the main window
-    cardCount = mw.col.card_count()
-    # show a message box
-    showInfo("Card count: %d" % cardCount)
+# def add_button_html(web_content: WebContent, context) -> None:
+#     if not isinstance(context, ReviewerBottomBar):
+#         return
+#
+#     web_content.head += """<style>#mybtn { margin-left:8px; padding:4px 8px; font-size:12px; }</style>"""
+#
+#     web_content.body += """<button id="mybtn" onclick="pycmd('my_bottom_button')">★ My Btn</button>"""
+#
+# def on_js_message(handled: bool, message: str, context):
+#     if not message == "my_bottom_button":
+#         return (False, None)
+#     print(f"Current card id: {mw.reviewer.card.id}")
+#     return (True, None)
+#
+# gui_hooks.webview_will_set_content.append(add_button_html)
+# gui_hooks.webview_did_receive_js_message.append(on_js_message)
+# mw.addonManager.setWebExports(__name__, r"web/.*")
 
-# create a new menu item, "test"
-action = QAction("test", mw)
+init_settings()
+add_to_gui()
 
-print("Started add on")
-
-# set it to call testFunction when it's clicked
-qconnect(action.triggered, testFunction)
-# and add it to the tools menu
-mw.form.menuTools.addAction(action)
